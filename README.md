@@ -32,7 +32,6 @@ oldy url        # print your public URL
 
 ## How it works
 
-[architecture diagram image here — add after recording demo]
 
 Oldy manages Ollama under the hood. You never touch Ollama directly.
 An ngrok tunnel makes your local server publicly accessible without
