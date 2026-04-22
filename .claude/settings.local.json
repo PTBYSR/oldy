@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-NetTCPConnection -LocalPort 11434)",
+      "PowerShell(netstat -ano)",
+      "PowerShell(findstr -i ollama)",
+      "PowerShell(taskkill /F /IM \"ollama app.exe\")",
+      "PowerShell(taskkill /F /IM \"ollama.exe\")"
+    ]
+  }
+}

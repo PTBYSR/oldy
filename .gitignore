@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# PyInstaller / Build folders
+build/
+dist/
+*.spec
+*.egg-info/
+.eggs/
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Local app data
+.oldy/
+ngrok.exe
+ngrok
