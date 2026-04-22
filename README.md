@@ -4,7 +4,7 @@
 
 # Oldy
 
-Turn any old laptop into a local AI server.
+Turn any old laptop into a AI server with a dedicated free API key.
 
 ## What it does
 
