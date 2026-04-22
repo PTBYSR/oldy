@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="oldy-hero.png" alt="Oldy Header" width="600">
+  <img src="oldy-hero.png" alt="Oldy Header" width="100">
 </p>
 
 # Oldy
