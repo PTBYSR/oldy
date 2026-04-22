@@ -49,7 +49,3 @@ port forwarding or networking setup.
 | llama3.2:3b      | 2.0GB  | 3GB     |
 | phi3:mini        | 2.3GB  | 4GB     |
 | mistral:7b       | 4.1GB  | 6GB     |
-
-## Demo
-
-[add GIF here]
