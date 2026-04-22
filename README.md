@@ -2,13 +2,13 @@
   <img src="oldy-hero.png" alt="Oldy Header" width="100">
 </p>
 
-# ⚡ Oldy
+#  Oldy
 
 **Turn any old laptop into an AI server with a dedicated free API key.**
 
 Oldy is a lightweight wrapper for [Ollama](https://ollama.com) designed specifically for recycling old hardware into accessible AI endpoints.
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Install
 ```bash
@@ -26,7 +26,7 @@ oldy url        # Display your public ngrok URL
 oldy key        # Display your secure API key
 ```
 
-## 🧠 Why Oldy?
+##  Why Oldy?
 
 While Ollama is the engine, Oldy is the specialized driver for aging hardware:
 
@@ -36,7 +36,7 @@ While Ollama is the engine, Oldy is the specialized driver for aging hardware:
 
 ---
 
-## 🔌 Connecting
+##  Connecting
 
 Oldy is compatible with the OpenAI API format. Just provide your public URL as the `base_url` and your generated API key.
 
@@ -68,15 +68,15 @@ curl -X POST YOUR_OLDY_URL/api/generate \
 
 ---
 
-## 🛠️ How it works
+##  How it works
 
 Oldy manages Ollama under the hood so you don't have to. An **ngrok tunnel** makes your local server publicly accessible without networking setup. All traffic is secured by a built-in **FastAPI proxy** that handles:
 - **Authentication:** Only requests with your Bearer token are allowed.
 - **Rate Limiting:** Enforces a 30 req/min limit to prevent hardware overheating.
 - **Header Sanitization:** Ensures compatibility between public requests and the local engine.
 
-## 📊 Supported Models (v1)
-
+##  Supported Models (v1)
+*more models coming soon*
 | Model            | Size   | Min RAM |
 |------------------|--------|---------|
 | tinyllama        | 0.6GB  | 1GB     |
@@ -86,6 +86,7 @@ Oldy manages Ollama under the hood so you don't have to. An **ngrok tunnel** mak
 | llama3.2:3b      | 2.0GB  | 3GB     |
 | phi3:mini        | 2.3GB  | 4GB     |
 | mistral:7b       | 4.1GB  | 6GB     |
+
 
 ---
 *Requirements: Python 3.10+, Linux/macOS/Windows, 4GB+ RAM.*
