@@ -2,46 +2,43 @@
   <img src="oldy-hero.png" alt="Oldy Header" width="100">
 </p>
 
-# Oldy
+# ⚡ Oldy
 
-Turn any old laptop into an AI server with a dedicated free API key.
+**Turn any old laptop into an AI server with a dedicated free API key.**
 
-## What it does
+Oldy is a lightweight wrapper for [Ollama](https://ollama.com) designed specifically for recycling old hardware into accessible AI endpoints.
 
-Install Oldy on a low-RAM laptop. It detects your hardware, picks a model that fits,
-starts a local AI server, and gives you a public URL you can hit from anywhere.
+## 🚀 Quick Start
 
-## Requirements
-
-- Python 3.10+
-- Linux or macOS
-- 4GB+ RAM
-
-## Install
-
+### Install
+```bash
 pip install oldy
+```
 
-## Usage
+### Usage
+```bash
+oldy start      # Auto-detect hardware, pick model, and start public server
+oldy stop       # Shut down the tunnel and local engine
+oldy status     # Check RAM, CPU, and model performance
+oldy models     # Browse and switch between supported models
+oldy logs       # View live request logs
+oldy url        # Display your public ngrok URL
+oldy key        # Display your secure API key
+```
 
-oldy start      # detect hardware, pick model, start server, get public URL
-oldy stop       # shut everything down
-oldy status     # RAM, CPU, uptime, current model
-oldy models     # browse and switch models
-oldy logs       # live request log
-oldy url        # print your public URL
-oldy key        # print your secure API key
+## 🧠 Why Oldy?
 
-## Why Oldy?
+While Ollama is the engine, Oldy is the specialized driver for aging hardware:
 
-While Ollama is the engine, Oldy is the specialized driver for old hardware:
+- **Hardware Safety:** Ollama will let you download models that crash your system; Oldy calculates your RAM/CPU first to ensure a stable experience.
+- **Instant Public Access:** Ollama only works on `localhost`; Oldy automatically provisions a secure public URL and API key.
+- **Hardware Monitoring:** Built-in status checks help you see exactly how the model is performing on your specific hardware.
 
-- **Hardware Safety:** Ollama will let you download models that crash your laptop; Oldy calculates your RAM/CPU first to ensure a stable experience.
-- **Instant Public Access:** Ollama only works on `localhost`; Oldy automatically sets up a secure public URL and API key.
-- **Hardware Monitoring:** Oldy gives you built-in status checks to see exactly how the model is performing on your specific hardware.
+---
 
-## Connecting to Oldy
+## 🔌 Connecting
 
-Oldy is compatible with the OpenAI API format. You can use any standard library, but you must provide your public URL as the `base_url` and your API key.
+Oldy is compatible with the OpenAI API format. Just provide your public URL as the `base_url` and your generated API key.
 
 ### Python (OpenAI SDK)
 
@@ -69,16 +66,16 @@ curl -X POST YOUR_OLDY_URL/api/generate \
   -d '{"model": "gemma:2b", "prompt": "Hello!", "stream": false}'
 ```
 
-## How it works
+---
 
+## 🛠️ How it works
 
-Oldy manages Ollama under the hood. You never touch Ollama directly.
-An ngrok tunnel makes your local server publicly accessible without
-port forwarding or networking setup. All traffic is secured by a 
-built-in FastAPI proxy that requires an API key and enforces 
-rate limits to protect your laptop's hardware.
+Oldy manages Ollama under the hood so you don't have to. An **ngrok tunnel** makes your local server publicly accessible without networking setup. All traffic is secured by a built-in **FastAPI proxy** that handles:
+- **Authentication:** Only requests with your Bearer token are allowed.
+- **Rate Limiting:** Enforces a 30 req/min limit to prevent hardware overheating.
+- **Header Sanitization:** Ensures compatibility between public requests and the local engine.
 
-## Supported models (v1)
+## 📊 Supported Models (v1)
 
 | Model            | Size   | Min RAM |
 |------------------|--------|---------|
@@ -89,3 +86,6 @@ rate limits to protect your laptop's hardware.
 | llama3.2:3b      | 2.0GB  | 3GB     |
 | phi3:mini        | 2.3GB  | 4GB     |
 | mistral:7b       | 4.1GB  | 6GB     |
+
+---
+*Requirements: Python 3.10+, Linux/macOS/Windows, 4GB+ RAM.*
