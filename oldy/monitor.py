@@ -35,5 +35,6 @@ def get_status() -> dict:
         "uptime":       uptime,
         "model":        cfg.get("selected_model", "none"),
         "public_url":   cfg.get("public_url", "not set"),
+        "api_key":      cfg.get("api_key", "not set"),
         "ollama_alive": ollama_alive,
     }

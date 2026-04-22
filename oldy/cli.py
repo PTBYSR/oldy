@@ -1,4 +1,5 @@
 import os
+import secrets
 import subprocess
 from datetime import datetime
 
@@ -9,7 +10,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.align import Align
 
-from oldy import config, hardware, monitor, ollama_manager, tunnel
+from oldy import config, hardware, monitor, ollama_manager, tunnel, proxy
 from oldy import models as models_module
 from oldy.log import LOG_FILE
 
@@ -65,10 +66,19 @@ def start():
 
     config.set("started_at", datetime.now().isoformat())
 
+    # Ensure API Key
+    api_key = config.get().get("api_key")
+    if not api_key:
+        api_key = f"sk-oldy-{secrets.token_hex(16)}"
+        config.set("api_key", api_key)
+
+    rprint("Starting secure proxy...")
+    proxy.start()
+
     rprint("Setting up public tunnel...")
     try:
         tunnel.ensure_ngrok()
-        public_url = tunnel.start()
+        public_url = tunnel.start(port=11435)
     except Exception as e:
         public_url = None
         from oldy import log
@@ -78,7 +88,8 @@ def start():
     rprint("\n[bold green]Oldy is running.[/]")
     rprint("  Local:  http://localhost:11434")
     if public_url:
-        rprint(f"  Public: [bold cyan]{public_url}[/]")
+        rprint(f"  Public:  [bold cyan]{public_url}[/]")
+        rprint(f"  API Key: [bold magenta]{api_key}[/]")
     else:
         rprint("  Public: [yellow]unavailable (tunnel failed)[/]")
 
@@ -86,6 +97,7 @@ def start():
 def stop():
     _require_running()
     try:
+        proxy.stop()
         tunnel.stop()
         ollama_manager.stop()
     except RuntimeError as e:
@@ -127,6 +139,7 @@ def status():
     table.add_row("CPU",        f"{s['cpu_percent']}%")
     table.add_row("Uptime",     s["uptime"])
     table.add_row("Public URL", s["public_url"])
+    table.add_row("API Key",    s["api_key"])
 
     console.print(table)
 
@@ -167,3 +180,11 @@ def url():
         rprint("[yellow]No public URL. Tunnel not running.[/]")
     else:
         rprint(public_url)
+
+@app.command()
+def key():
+    api_key = config.get().get("api_key")
+    if not api_key:
+        rprint("[yellow]No API key found. Run: oldy start[/]")
+    else:
+        rprint(api_key)

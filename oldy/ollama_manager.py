@@ -75,8 +75,11 @@ def start() -> None:
 
 def stop() -> None:
     if os.name == "nt":
-        subprocess.run(["taskkill", "/F", "/IM", "ollama app.exe"], capture_output=True)
-        subprocess.run(["taskkill", "/F", "/IM", "ollama.exe"], capture_output=True)
+        try:
+            subprocess.run(["taskkill", "/F", "/IM", "ollama app.exe"], capture_output=True)
+            subprocess.run(["taskkill", "/F", "/IM", "ollama.exe"], capture_output=True)
+        except OSError:
+            pass
     else:
         pid = config.get().get("ollama_pid")
         if pid:
